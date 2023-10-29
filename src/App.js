@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './App.css';
 
 function App() {
   const [advice, setAdvice] = useState('');
@@ -13,20 +14,27 @@ function App() {
     axios
       .get('https://api.adviceslip.com/advice')
       .then((res) => {
-        const { advice } = res.data.slip; 
+        const { advice } = res.data.slip;
         setAdvice(advice);
         console.log(advice);
       })
       .catch((err) => {
-        console.log('Error during fetching!', err);
+        console.error('Error during fetching!', err);
       });
   };
 
-  return <div className='container'>
-    <div className='main'>
-    <div className='quote'>{advice}</div>
-</div>
-</div>
+  return (
+    <div className='container'>
+      <div className='main'>
+        <h1 className='q'>QuotesterQ</h1>
+        <div className='quote'>{advice}</div>
+        <br />
+        <br />
+        <br />
+        <button className="button" onClick={fetchAdvice}>See More</button>
+      </div>
+    </div>
+  );
 }
 
 export default App;
